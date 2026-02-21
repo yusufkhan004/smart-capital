@@ -6,6 +6,7 @@ import com.v1.SmartCapital.enums.Gender;
 import com.v1.SmartCapital.enums.UserStatus;
 import com.v1.SmartCapital.enums.UserType;
 import com.v1.SmartCapital.util.CommonUtils;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import static com.v1.SmartCapital.util.CommonUtils.getEnumMap;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,6 +42,7 @@ public class User extends Auditable<String> {
     String password;
     Boolean isActive = Boolean.TRUE;
     @Enumerated(EnumType.STRING)
+    @Nullable
     UserStatus status;
     Boolean isFirstTime;
     @Enumerated(EnumType.STRING)
@@ -61,7 +64,7 @@ public class User extends Auditable<String> {
     }
 
     public UserDTO getUserDTO() {
-        return new UserDTO(id, firstname, lastname, gender, mobileNumber, countryCode,email, location, username, isActive, creationDate, lastModifiedDate, getEnumMap(status.name(),status.value()), CommonUtils.getUsername(createdBy),isFirstTime, userType);
+        return new UserDTO(id, firstname, lastname, gender, mobileNumber, countryCode, email, location, username, isActive, creationDate, lastModifiedDate, status != null ? getEnumMap(status.name(), status.value()) : null, CommonUtils.getUsername(createdBy), isFirstTime, userType);
     }
 }
 

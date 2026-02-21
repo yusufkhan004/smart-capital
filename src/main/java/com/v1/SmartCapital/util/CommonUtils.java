@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -35,6 +36,8 @@ public class CommonUtils {
     }
 
     public static String getUsername(String userId) {
+        if (Objects.isNull(userId))
+            return null;
         Optional<User> optionalUser = userRepository.findById(Long.valueOf(userId));
         return optionalUser.map(User::getUsername).orElse(null);
     }

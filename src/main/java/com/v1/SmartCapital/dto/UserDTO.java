@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -40,10 +41,8 @@ public class UserDTO {
     Long parentUserId;
     String teamLeadUsername;
     String adminUsername;
-    @Temporal(TemporalType.TIMESTAMP)
-    Date dateCreated;
-    @Temporal(TemporalType.TIMESTAMP)
-    Date lastUpdated;
+    LocalDateTime dateCreated;
+    LocalDateTime lastUpdated;
     @Enumerated(EnumType.STRING)
     Map<String,String> status = new HashMap<>();
     String createdBy;
@@ -51,7 +50,7 @@ public class UserDTO {
     UserType userType;
 
     public UserDTO(Long id, String firstname, String lastname, Gender gender, Long mobileNumber,String countryCode, String email, String location,
-                   String username, Boolean isActive, Date dateCreated, Date lastUpdated, Map<String,String> status, String createdBy,Boolean isFirstTime, UserType userType){
+                   String username, Boolean isActive, LocalDateTime dateCreated, LocalDateTime lastUpdated, Map<String,String> status, String createdBy,Boolean isFirstTime, UserType userType){
         this.id=id;
         this.firstname=firstname;
         this.lastname=lastname;
