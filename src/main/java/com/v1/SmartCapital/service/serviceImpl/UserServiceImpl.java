@@ -68,24 +68,47 @@ public class UserServiceImpl implements IUserService {
     public UserDTO editUser(Long userId, UpdateUserRequest updateUserRequest) {
         logger.info("UserServiceImpl - Inside editUser method");
 
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isEmpty())
-            throw new NotFoundException(ERROR_USER_NOT_FOUND);
-        User user = optionalUser.get();
-        if (!user.getEmail().equals(updateUserRequest.getEmail()) && Boolean.TRUE.equals(userRepository.existsByEmail(updateUserRequest.getEmail())))
-            throw new AlreadyExistsException(ERROR_USER_WITH_SAME_EMAIL_ALREADY_EXISTS);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(ERROR_USER_NOT_FOUND));
+
+        // Email uniqueness check only if email is provided and changed
+        if (updateUserRequest.getEmail() != null && !updateUserRequest.getEmail().isEmpty()) {
+            if (!user.getEmail().equals(updateUserRequest.getEmail()) &&
+                    Boolean.TRUE.equals(userRepository.existsByEmail(updateUserRequest.getEmail()))) {
+                throw new AlreadyExistsException(ERROR_USER_WITH_SAME_EMAIL_ALREADY_EXISTS);
+            }
+        }
 
         try {
-            user.setFirstname(updateUserRequest.getFirstname());
-            user.setLastname(updateUserRequest.getLastname());
-            user.setGender(CommonUtils.getGender(updateUserRequest.getGender()));
-            user.setMobileNumber(Long.parseLong(updateUserRequest.getMobileNumber()));
-            user.setEmail(updateUserRequest.getEmail());
-            user.setLocation(updateUserRequest.getLocation());
-            user.setUsername(updateUserRequest.getUsername());
-            user.setIsActive(updateUserRequest.getIsActive());
+            // TUNE: Conditional setters to maintain old records
+            if (updateUserRequest.getFirstname() != null && !updateUserRequest.getFirstname().isBlank()) {
+                user.setFirstname(updateUserRequest.getFirstname());
+            }
+            if (updateUserRequest.getLastname() != null && !updateUserRequest.getLastname().isBlank()) {
+                user.setLastname(updateUserRequest.getLastname());
+            }
+            if (updateUserRequest.getGender() != null && !updateUserRequest.getGender().isBlank()) {
+                user.setGender(CommonUtils.getGender(updateUserRequest.getGender()));
+            }
+            if (updateUserRequest.getMobileNumber() != null && !updateUserRequest.getMobileNumber().isBlank()) {
+                user.setMobileNumber(Long.parseLong(updateUserRequest.getMobileNumber()));
+            }
+            if (updateUserRequest.getEmail() != null && !updateUserRequest.getEmail().isBlank()) {
+                user.setEmail(updateUserRequest.getEmail());
+            }
+            if (updateUserRequest.getLocation() != null && !updateUserRequest.getLocation().isBlank()) {
+                user.setLocation(updateUserRequest.getLocation());
+            }
+            if (updateUserRequest.getUsername() != null && !updateUserRequest.getUsername().isBlank()) {
+                user.setUsername(updateUserRequest.getUsername());
+            }
+            if (updateUserRequest.getIsActive() != null) {
+                user.setIsActive(updateUserRequest.getIsActive());
+            }
+
             user = userRepository.save(user);
             return user.getUserDTO();
+
         } catch (Exception ex) {
             logger.error(EXCEPTION, ex);
             throw ex;

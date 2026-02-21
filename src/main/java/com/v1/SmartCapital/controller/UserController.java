@@ -52,7 +52,7 @@ public class UserController {
     }
 
     //Api to get all users except the loggedIn user
-    @GetMapping("/fetch-all-user")
+    @GetMapping("/fetch-all-usernames")
     public ResponseEntity<ResponseDTO> fetchAllUsers(){
         logger.info("UserController - Inside fetchAllUsers method");
         return ResponseEntityUtils.get(userService.fetchAllUsers(),MSG_ALL_MEMBERS_FETCHED);
