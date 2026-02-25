@@ -14,6 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 import static com.v1.SmartCapital.util.CommonUtils.getEnumMap;
 
 @Data
@@ -25,8 +27,9 @@ import static com.v1.SmartCapital.util.CommonUtils.getEnumMap;
 public class User extends Auditable<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(updatable = false, nullable = false)
+    UUID id;
     @Column(length = 255)
     String firstname;
     @Column(length = 255)

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.v1.SmartCapital.constants.ErrorMsgConstants.*;
@@ -65,7 +66,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDTO editUser(Long userId, UpdateUserRequest updateUserRequest) {
+    public UserDTO editUser(UUID userId, UpdateUserRequest updateUserRequest) {
         logger.info("UserServiceImpl - Inside editUser method");
 
         User user = userRepository.findById(userId)
@@ -116,7 +117,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDTO viewUser(Long userId) {
+    public UserDTO viewUser(UUID userId) {
         logger.info("UserServiceImpl - Inside viewUser method");
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty())
