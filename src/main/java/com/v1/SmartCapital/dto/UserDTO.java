@@ -22,7 +22,7 @@ import java.util.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDTO {
-    Long id;
+    UUID id;
     String firstname;
     String lastname;
     String fullname;
@@ -49,7 +49,7 @@ public class UserDTO {
     Boolean isFirstTime;
     UserType userType;
 
-    public UserDTO(Long id, String firstname, String lastname, Gender gender, Long mobileNumber,String countryCode, String email, String location,
+    public UserDTO(UUID id, String firstname, String lastname, Gender gender, Long mobileNumber,String countryCode, String email, String location,
                    String username, Boolean isActive, LocalDateTime dateCreated, LocalDateTime lastUpdated, Map<String,String> status, String createdBy,Boolean isFirstTime, UserType userType){
         this.id=id;
         this.firstname=firstname;

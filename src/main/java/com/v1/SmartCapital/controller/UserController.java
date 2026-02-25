@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.v1.SmartCapital.constants.GeneralMsgConstants.*;
 
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/edit-user/{userId}")
-    public ResponseEntity<ResponseDTO> editUser(@PathVariable long userId, @RequestBody UpdateUserRequest updateUserRequest){
+    public ResponseEntity<ResponseDTO> editUser(@PathVariable UUID userId, @RequestBody UpdateUserRequest updateUserRequest){
         logger.info("UserController- inside editUser method");
         return ResponseEntityUtils.get(userService.editUser(userId,updateUserRequest), MSG_USER_UPDATED);
     }
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping("/view-user/{userId}")
-    public ResponseEntity<ResponseDTO> viewUser(@PathVariable Long userId){
+    public ResponseEntity<ResponseDTO> viewUser(@PathVariable UUID userId){
         logger.info("UserController - Inside viewUser method");
         return ResponseEntityUtils.get(userService.viewUser(userId),MSG_SUCCESS);
     }

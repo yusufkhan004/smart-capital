@@ -5,5 +5,6 @@ public class ErrorMsgConstants {
     private ErrorMsgConstants() {}
     public static final String EXCEPTION = "exception";
     public static final String ERROR_USER_NOT_FOUND = "User Not Found";
+    public static final String ERROR_ROLE_NOT_FOUND = "Role Not Found";
     public static final String ERROR_USER_WITH_SAME_EMAIL_ALREADY_EXISTS = "User already exists with same Email-Id";
 }
