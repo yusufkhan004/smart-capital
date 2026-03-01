@@ -1,6 +1,5 @@
 package com.v1.SmartCapital.entity;
 
-import com.v1.SmartCapital.audit.Auditable;
 import com.v1.SmartCapital.enums.RoleType;
 import com.v1.SmartCapital.response.RoleResponse;
 import jakarta.persistence.*;
