@@ -1,7 +1,7 @@
 package com.v1.SmartCapital.controller;
 
 import com.v1.SmartCapital.dto.ResponseDTO;
-import com.v1.SmartCapital.dto.RoleRequest;
+import com.v1.SmartCapital.dto.RoleRequestDTO;
 import com.v1.SmartCapital.response.RoleResponse;
 import com.v1.SmartCapital.service.IRoleService;
 import com.v1.SmartCapital.util.ResponseEntityUtils;
@@ -26,10 +26,10 @@ public class RoleController {
     IRoleService roleService;
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseDTO> createRole(@RequestBody RoleRequest roleRequest) {
+    public ResponseEntity<ResponseDTO> createRole(@RequestBody RoleRequestDTO roleRequestDTO) {
         logger.info("RoleController- inside createRole method");
         return ResponseEntityUtils.get(
-                roleService.createRole(roleRequest.getName()),
+                roleService.createRole(roleRequestDTO.getName()),
                 MSG_ROLE_CREATED);
     }
 

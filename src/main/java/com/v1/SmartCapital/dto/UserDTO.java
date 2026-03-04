@@ -5,8 +5,6 @@ import com.v1.SmartCapital.enums.Gender;
 import com.v1.SmartCapital.enums.UserType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

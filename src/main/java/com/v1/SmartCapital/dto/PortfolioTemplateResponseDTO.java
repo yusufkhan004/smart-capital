@@ -6,11 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TemplateDTO {
-    String templateName;
+public class PortfolioTemplateResponseDTO {
 
+    List<PortfolioTemplateItemDTO> templates;
 }
