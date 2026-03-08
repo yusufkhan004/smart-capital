@@ -1,45 +1,57 @@
 package com.v1.SmartCapital.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.security.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 @Entity
-@Table(name = "portfolio_details")
 public class PortfolioDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     String portfolioName;
 
     @Column(nullable = false)
-    String portfolioNo;
+    Long portfolioNo;
 
-    @Column(nullable = false, precision = 3, scale = 1)
+    @Column(nullable = false, precision = 3, scale = 10)
     BigDecimal versionNo;
 
     @Column(nullable = false)
-    LocalDateTime cutOffDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate cutOffDate;
 
     @Column(nullable = false)
-    LocalDateTime executionDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate executionDate;
 
-    @Column(nullable = false, updatable = false)
+    String fileName;
+
+    String filePath;
+
+    String fileType;
+
+    @CreationTimestamp
+    @Column(updatable = false, columnDefinition = "DATETIME(0)")
     LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @UpdateTimestamp
+    @Column(columnDefinition = "DATETIME(0)")
     LocalDateTime updatedAt;
 }

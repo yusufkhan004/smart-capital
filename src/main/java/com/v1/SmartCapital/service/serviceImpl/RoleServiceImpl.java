@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.v1.SmartCapital.constants.ErrorMsgConstants.ERROR_ROLE_NOT_FOUND;
+import static com.v1.SmartCapital.constants.ErrorMsgConstants.ROLE_ALREADY_EXISTS;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +31,9 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public RoleResponse createRole(RoleType name) {
         logger.info("RoleServiceImpl - Inside createRole method");
+
         if (roleRepository.findByName(name).isPresent()) {
-            throw new AlreadyExistsException("Role already exists: " + name);
+            throw new AlreadyExistsException(ROLE_ALREADY_EXISTS + name);
         }
 
         try {
@@ -57,6 +59,9 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public RoleType getById(UUID roleId) {
+
+        logger.info("RoleServiceImpl - Inside getById method");
+
         return roleRepository.findById(roleId)
                 .map(Role::getName)
                 .orElseThrow(() -> new NotFoundException(ERROR_ROLE_NOT_FOUND));

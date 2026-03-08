@@ -12,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "portfolio_template")
 public class PortfolioTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

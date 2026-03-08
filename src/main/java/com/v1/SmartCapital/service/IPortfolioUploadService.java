@@ -2,10 +2,11 @@ package com.v1.SmartCapital.service;
 
 import com.v1.SmartCapital.dto.PortfolioDetailsDTO;
 import com.v1.SmartCapital.dto.PortfolioTemplateResponseDTO;
+import org.springframework.web.multipart.MultipartFile;
 
-public interface IUploadDataService {
+public interface IPortfolioUploadService {
     PortfolioTemplateResponseDTO prepareUploadData();
 
-    PortfolioDetailsDTO createPortfolio(PortfolioDetailsDTO portfolioDetailsDTO);
+    PortfolioDetailsDTO uploadPortfolio(PortfolioDetailsDTO portfolioDetailsDTO, MultipartFile multipartFile);
 
 }
