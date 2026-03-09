@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.security.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,7 +32,7 @@ public class PortfolioDetails {
     @Column(nullable = false)
     Long portfolioNo;
 
-    @Column(nullable = false, precision = 3, scale = 10)
+    @Column(nullable = false, precision = 10, scale = 3)
     BigDecimal versionNo;
 
     @Column(nullable = false)
@@ -43,10 +45,6 @@ public class PortfolioDetails {
 
     String fileName;
 
-    String filePath;
-
-    String fileType;
-
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "DATETIME(0)")
     LocalDateTime createdAt;
@@ -54,4 +52,7 @@ public class PortfolioDetails {
     @UpdateTimestamp
     @Column(columnDefinition = "DATETIME(0)")
     LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "portfolioDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PortfolioUploadDetails> uploadDetails = new ArrayList<>();
 }

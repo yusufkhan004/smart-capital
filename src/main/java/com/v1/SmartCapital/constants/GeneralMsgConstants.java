@@ -12,4 +12,7 @@ public class GeneralMsgConstants {
     public static final String MSG_ALL_TEMPLATES_FETCHED_SUCCESSFULLY = "All templates fetched successfully";
     public static final String FILE_NAME_IS_INVALID = "File name is invalid";
     public static final String ONLY_EXCEL_FILES_ARE_ALLOWED = "Only Excel files (.xls, .xlsx) are allowed";
+    public static final int BATCH_SIZE = 1000;
+    public static final String INVALID_EXCEL_TYPE = "Invalid Excel file type";
+
 }
