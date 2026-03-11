@@ -10,4 +10,6 @@ public class ErrorMsgConstants {
     public static final String FILE_UPLOAD_FAILED = "File upload failed";
     public static final String UPLOADED_FILE_IS_MISSING_OR_EMPTY = "Uploaded file is missing or empty";
     public static final String ROLE_ALREADY_EXISTS = "Role already exists: ";
+    public static final String ERROR_FOLDER_PATH_NOT_FOUND = "Folder path not found";
+
 }
